@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { ListSpesficationsUseCase } from "./ListSpecificationsUseCase";
 
 class ListSpesficationsController {
-  constructor(private listSpecificationsUseCase: ListSpesficationsUseCase) {}
-
-  handdle(request: Request, response: Response): Response {
-    const specifications = this.listSpecificationsUseCase.execute();
+  async handdle(request: Request, response: Response): Promise<Response> {
+    const listSpesficationsUseCase = container.resolve(
+      ListSpesficationsUseCase
+    );
+    const specifications = await listSpesficationsUseCase.execute();
 
     return response.json(specifications);
   }
