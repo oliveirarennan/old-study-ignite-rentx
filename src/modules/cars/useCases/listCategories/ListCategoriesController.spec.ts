@@ -6,7 +6,7 @@ import { v4 as uuidV4 } from "uuid";
 import { app } from "@shared/infra/http/app";
 import createConnection from "@shared/infra/typeorm";
 
-describe("Create Category Controller", () => {
+describe("List Category Controller", () => {
   let connection: Connection;
 
   beforeAll(async () => {
@@ -32,7 +32,7 @@ describe("Create Category Controller", () => {
       password: "admin",
     });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
     await request(app)
       .post("/categories")
@@ -41,7 +41,7 @@ describe("Create Category Controller", () => {
         description: "Category Description Supertest",
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
 
     const response = await request(app).get("/categories");
