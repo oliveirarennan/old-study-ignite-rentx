@@ -54,7 +54,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ~/app/study-ignite-rentx
-            yarn ./node_modules./bin/typeorm migration:run
+            node node_modules/.bin/typeorm migrations:run
             pm2 restart rentx
             
       
