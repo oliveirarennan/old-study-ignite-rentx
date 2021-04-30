@@ -56,6 +56,7 @@ jobs:
             cd ~/app/study-ignite-rentx
             yarn
             node node_modules/.bin/typeorm migrations:run
-            pm2 restart rentx
+            pm2 restart dist/shared/infra/http/server.js
+            pm2 save
 
 
